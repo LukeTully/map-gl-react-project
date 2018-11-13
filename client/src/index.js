@@ -5,12 +5,12 @@ import { Provider } from 'react-redux';
 
 import store from './model/';
 
-import ProjectsIndex from './containers/ProjectsIndex';
+import InteractiveMap from './containers/InteractiveMap';
 
 import '../styles/app.scss';
 
 render(
   <Provider store={store}>
-    <ProjectsIndex />
+    <InteractiveMap />
   </Provider>
 , document.getElementById('application'));
