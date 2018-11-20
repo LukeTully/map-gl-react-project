@@ -12,7 +12,9 @@ import TREES from '../model/trees-data';
 class InteractiveMap extends Component {
   render() {
     const { bounding } = this.props.currentSite;
+    const trees = this.props.trees;
 
+    // Create a GeoJSON multipolygon outline for the bounding box
     const boundingFeature = turf.polygon(
       [
         [
@@ -25,6 +27,14 @@ class InteractiveMap extends Component {
       ],
       { name: 'Bounding Area' }
     );
+
+    // Create a list of circles to represent trees
+    const treeFeatures = trees.ids.map(tree => {
+      return turf.circle([trees.byId[tree].long, trees.byId[tree].lat], 0.002);
+    });
+
+    // Create GeoJSON FeatureCollection with our list of circles
+    const treeCollection = turf.featureCollection(treeFeatures);
 
     return (
       <Map {...this.props}>
