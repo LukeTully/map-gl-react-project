@@ -51,6 +51,14 @@ class InteractiveMap extends Component {
           }}
           source="bounding-box"
         />
+        <Layer
+          id="trees"
+          type="fill"
+          source="trees-source"
+          paint={{
+            'fill-color': '#fff'
+          }}
+        />
       </Map>
     );
   }
