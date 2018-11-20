@@ -40,6 +40,7 @@ class InteractiveMap extends Component {
       <Map {...this.props}>
         <Sources>
           <GeoJSON id="bounding-box" data={boundingFeature} />
+          <GeoJSON id="trees-source" data={treeCollection} />
         </Sources>
         <Layer
           id="bounding-box"
