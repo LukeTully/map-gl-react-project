@@ -7,8 +7,6 @@ import Map, { Layer, Sources, GeoJSON } from '../components/map';
 
 import { centerMapOnSite, mapSetCenter, mapSetZoom } from '../model/map';
 
-// Import hardcoded tree data
-import TREES from '../model/trees-data';
 class InteractiveMap extends Component {
   render() {
     const { bounding } = this.props.currentSite;
