@@ -10,19 +10,24 @@ import { centerMapOnSite, mapSetCenter, mapSetZoom } from '../model/map';
 class InteractiveMap extends Component {
   render() {
     const { bounding } = this.props.currentSite;
-    
-    const boundingFeature = turf.polygon([[
-      [bounding.left, bounding.top],
-      [bounding.right, bounding.top],
-      [bounding.right, bounding.bottom],
-      [bounding.left, bounding.bottom],
-      [bounding.left, bounding.top]
-    ]], { name: 'Bounding Area' });
+
+    const boundingFeature = turf.polygon(
+      [
+        [
+          [bounding.left, bounding.top],
+          [bounding.right, bounding.top],
+          [bounding.right, bounding.bottom],
+          [bounding.left, bounding.bottom],
+          [bounding.left, bounding.top]
+        ]
+      ],
+      { name: 'Bounding Area' }
+    );
 
     return (
-      <Map { ...this.props }>
+      <Map {...this.props}>
         <Sources>
-          <GeoJSON id="bounding-box" data={ boundingFeature } />
+          <GeoJSON id="bounding-box" data={boundingFeature} />
         </Sources>
         <Layer
           id="bounding-box"
@@ -52,4 +57,7 @@ const mapDispatchToProps = {
   mapSetZoom
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(InteractiveMap);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(InteractiveMap);
