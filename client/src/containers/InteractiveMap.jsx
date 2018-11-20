@@ -52,6 +52,15 @@ class InteractiveMap extends Component {
           source="bounding-box"
         />
         <Layer
+          id="bounding-box-fill"
+          type="fill"
+          source="bounding-box"
+          paint={{
+            'fill-color': '#fff',
+            'fill-opacity': 0.2
+          }}
+        />
+        <Layer
           id="trees"
           type="fill"
           source="trees-source"
