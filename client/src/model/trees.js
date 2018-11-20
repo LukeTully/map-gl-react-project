@@ -1,51 +1,51 @@
 import axios from 'axios';
 
-export const FETCH_SITES_REQUESTED = 'FETCH_SITES_REQUESTED';
-export const FETCH_SITES_COMPLETED = 'FETCH_SITES_COMPLETED';
-export const FETCH_SITES_ERROR = 'FETCH_SITES_ERROR';
+export const FETCH_TREES_REQUESTED = 'FETCH_TREES_REQUESTED';
+export const FETCH_TREES_COMPLETED = 'FETCH_TREES_COMPLETED';
+export const FETCH_TREES_ERROR = 'FETCH_TREES_ERROR';
 
-export const SITES_SET_CURRENT = 'SITES_SET_CURRENT';
+export const TREES_SET_CURRENT = 'TREES_SET_CURRENT';
 
-function fetchSitesRequested() {
+function fetchTreesRequested() {
   return {
-    type: FETCH_SITES_REQUESTED
+    type: FETCH_TREES_REQUESTED
   };
 }
 
-function fetchSitesCompleted(sites) {
+function fetchTreesCompleted(trees) {
  
   return {
-    type: FETCH_SITES_COMPLETED,
-    sites
+    type: FETCH_TREES_COMPLETED,
+    trees
   };
 }
 
-function fetchSitesError(error) {
+function fetchTreesError(error) {
   return {
-    type: FETCH_SITES_ERROR,
+    type: FETCH_TREES_ERROR,
     error
   };
 }
 
-export function fetchSites() {
+export function fetchTrees() {
   return dispatch => {
-    dispatch(fetchSitesRequested());
+    dispatch(fetchTreesRequested());
 
     axios
-    .get('/api/sites')
+    .get('/api/trees')
     .then((response) => {
      
-      dispatch(fetchSitesCompleted(response.data));
+      dispatch(fetchTreesCompleted(response.data));
     })
     .catch(error => {
-      dispatch(fetchSitesError(error));
+      dispatch(fetchTreesError(error));
     });
   }
 }
 
-export function sitesSetCurrent(id) {
+export function treesSetCurrent(id) {
   return {
-    type: SITES_SET_CURRENT,
+    type: TREES_SET_CURRENT,
     id
   };
 }
@@ -59,29 +59,29 @@ const initial = {
 };
 
 const reducer = {
-  [FETCH_SITES_REQUESTED](state, action) {
+  [FETCH_TREES_REQUESTED](state, action) {
     return {
       ...state,
-      status: FETCH_SITES_REQUESTED
+      status: FETCH_TREES_REQUESTED
     };
   },
-  [FETCH_SITES_COMPLETED](state, action) {
+  [FETCH_TREES_COMPLETED](state, action) {
     return {
       ...state,
-      status: FETCH_SITES_COMPLETED,
+      status: FETCH_TREES_COMPLETED,
       error: null,
-      selected: action.sites.ids.length > 0 ? action.sites.ids[0] : null,
-      ...action.sites
+      selected: action.trees.ids.length > 0 ? action.trees.ids[0] : null,
+      ...action.trees
     };
   },
-  [FETCH_SITES_ERROR](state, action) {
+  [FETCH_TREES_ERROR](state, action) {
     return {
       ...state,
-      status: FETCH_SITES_ERROR,
+      status: FETCH_TREES_ERROR,
       error: action.error
     };
   },
-  [SITES_SET_CURRENT](state, action) {
+  [TREES_SET_CURRENT](state, action) {
     return {
       ...state,
       selected: action.id
