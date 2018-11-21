@@ -5,11 +5,13 @@ import { createSelector } from 'reselect';
 import projects from './projects';
 import sites from './sites';
 import map from './map';
+import trees from './trees';
 
 const reducers = combineReducers({
   projects,
   sites,
-  map
+  map,
+  trees
 });
 
 const middleware = [
@@ -27,6 +29,7 @@ export default createStore(
 
 const allProjects = state => state.projects;
 const allSites = state => state.sites;
+const allTrees = state => state.trees;
 
 export const getProjects = createSelector(
   [allProjects],
@@ -37,4 +40,9 @@ export const getSites = createSelector(
   [allSites],
   sites => sites.ids.map(id => sites.byId[id])
 );
+
+export const getTrees = createSelector(
+  [allTrees],
+  trees => trees.ids.map(id => sites.byId[id])
+)
   
