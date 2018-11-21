@@ -13,7 +13,7 @@ function fetchTreesRequested() {
 }
 
 function fetchTreesCompleted(trees) {
- 
+
   return {
     type: FETCH_TREES_COMPLETED,
     trees
@@ -32,28 +32,20 @@ export function fetchTrees() {
     dispatch(fetchTreesRequested());
 
     axios
-    .get('/api/trees')
-    .then((response) => {
-     
-      dispatch(fetchTreesCompleted(response.data));
-    })
-    .catch(error => {
-      dispatch(fetchTreesError(error));
-    });
-  }
-}
+      .get('/api/trees')
+      .then((response) => {
 
-export function treesSetCurrent(id) {
-  return {
-    type: TREES_SET_CURRENT,
-    id
-  };
+        dispatch(fetchTreesCompleted(response.data));
+      })
+      .catch(error => {
+        dispatch(fetchTreesError(error));
+      });
+  }
 }
 
 const initial = {
   status: null,
   error: null,
-  selected: null,
   byId: {},
   ids: []
 };
@@ -70,7 +62,6 @@ const reducer = {
       ...state,
       status: FETCH_TREES_COMPLETED,
       error: null,
-      selected: action.trees.ids.length > 0 ? action.trees.ids[0] : null,
       ...action.trees
     };
   },
