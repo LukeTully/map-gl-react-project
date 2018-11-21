@@ -9,11 +9,13 @@ import Sidebar from './Sidebar';
 import InteractiveMap from './InteractiveMap';
 import Chart from './Chart';
 import Loading from '../components/Loading';
+import { FETCH_TREES_COMPLETED, fetchTrees } from '../model/trees';
 
 class ProjectsIndex extends Component {
   componentDidMount() {
     this.props.fetchProjects();
     this.props.fetchSites();
+    this.props.fetchTrees();
   }
 
   render() {
@@ -35,13 +37,15 @@ function mapStateToProps(state) {
   return {
     loaded: state.projects.status === FETCH_PROJECTS_COMPLETED &&
             state.sites.status === FETCH_SITES_COMPLETED &&
-            state.sites.selected !== null
+            state.sites.selected !== null &&
+            state.trees.status === FETCH_TREES_COMPLETED
   };
 }
 
 const mapDispatchToProps = {
   fetchProjects,
-  fetchSites
+  fetchSites,
+  fetchTrees
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectsIndex);
