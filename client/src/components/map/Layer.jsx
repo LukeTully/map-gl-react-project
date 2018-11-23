@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
-
 import MapContext from './context';
 
+/* Component for managing a MapBoxGL map layer */
 export class Layer extends Component {
   componentDidUpdate(previous) {
     const { id, map, type, paint, source } = this.props;
 
-    if(map) {
-      if(map.getLayer(id)) {
+    if (map) {
+      // Remove the layer from the map if it exists
+      if (map.getLayer(id)) {
         map.removeLayer(id);
       }
-
-      if(!map.getSource(source)) {
-        console.error(`Adding a layer with a source that doesn't exist. Make sure sources come before layers.`);
+      // Check for a source on the map
+      if (!map.getSource(source)) {
+        console.error(
+          `Adding a layer with a source that doesn't exist. Make sure sources come before layers.`
+        );
       }
 
+      // Add a layer to the map
       map.addLayer({
         id,
         type,
@@ -35,6 +39,6 @@ export class Layer extends Component {
 
 export default props => (
   <MapContext.Consumer>
-    { context => <Layer { ...props } { ...context } /> }
+    {context => <Layer {...props} {...context} />}
   </MapContext.Consumer>
 );
