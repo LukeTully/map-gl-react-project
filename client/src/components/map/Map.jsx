@@ -15,10 +15,11 @@ export default class Map extends Component {
   constructor(props) {
     super(props);
 
-    mapboxgl.accessToken = process.env.MAPBOX_PUBLIC_KEY;
+    mapboxgl.accessToken = process.env.MAPBOX_PUBLIC_KEY; // Acquire Mapbox public token from env file
   }
 
   componentDidMount() {
+    /* Configure a Mapbox GL instance */
     const map = new mapboxgl.Map({
       container: this.container,
       style: 'mapbox://styles/mapbox/satellite-v9',
