@@ -41,6 +41,11 @@ export const getSites = createSelector(
   sites => sites.ids.map(id => sites.byId[id])
 );
 
+export const getSitesById = createSelector(
+  [allSites],
+  sites => sites.byId
+)
+
 export const getTrees = createSelector(
   [allTrees],
   trees => trees.ids.map(id => sites.byId[id])

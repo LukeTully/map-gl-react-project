@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getProjects, getSites } from '../model';
+import { getProjects, getSitesById } from '../model';
 
 import { centerMapOnSite } from '../model/map';
 
@@ -32,16 +32,16 @@ class Sidebar extends Component {
       ]
     */
 
-    const items = [];
-
-    return <List items={ items } onClickSubitem={ this.props.centerMapOnSite } />
+    const items = this.props.projects;
+    const sites = this.props.sites;
+    return <List items={ items } sites={sites} onClickSubitem={ this.props.centerMapOnSite } />
   }
 }
 
 function mapStateToProps(state) {
   return {
     projects: getProjects(state),
-    sites: getSites(state)
+    sites: getSitesById(state)
   };
 }
 
